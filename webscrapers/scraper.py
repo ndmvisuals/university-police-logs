@@ -90,7 +90,7 @@ def scrape_umd_arrest(date):
             "umpd_case_number": umpd_case_number, "race": race, "age": age, "sex": sex, "description": description}
     today = date.today()
     df = pd.DataFrame(data)
-    df.to_csv(f"../data/raw/arrests_data_{today}.csv")
+    df.to_csv(f"/data/raw/arrests_data_{today}.csv")
 
 
 def scrape_umd_incident(date):
@@ -142,7 +142,7 @@ def scrape_umd_incident(date):
             "report_date_time": report_date_time, "_type": _type, "disposition": disposition, "location": location}
     today = date.today()
     df = pd.DataFrame(data)
-    df.to_csv(f"../data/raw/incidents_data_{today}.csv")
+    df.to_csv(f"/data/raw/incidents_data_{today}.csv")
 
 
 today = date.today()
