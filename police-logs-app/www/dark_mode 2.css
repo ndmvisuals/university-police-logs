@@ -1,0 +1,122 @@
+/* Get a fancy font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+
+*{
+  font-family: 'Poppins', Sans-Serif;
+}
+
+
+body {
+  /*display: none; */
+  background-color: white;
+  color: white; /* text color */
+}
+
+.container-fluid {
+    margin-right: auto !important;
+    margin-left: auto !important;
+}
+
+.wrapper{
+    box-shadow: 10px 10px 10px gainsboro;
+    border-left: 1px solid #e9e8ea;
+    border-bottom: 1px solid #e9e8ea;
+    border-top: 1px solid #e9e8ea;
+    border-right: 1px solid #e9e8ea;
+    border-radius: 5px;
+    box-shadow:10px 10px 10px gainsboro;
+
+}
+
+.container-fluid .info h4{
+  
+  font-size: 20px !important;
+  border-bottom: 20px !important;
+  color: #0a0a0a !important;
+}
+
+.content-wrapper, .right-side {
+    background-color: #E9E8EA !important;
+}
+
+.skin-blue .left-side, .skin-blue .main-sidebar, .skin-blue .wrapper {
+    background-color: #0a0a0a !important;
+}
+
+/* Change header text to imported font */
+h2 {
+  font-family: 'Poppins', sans-serif;
+  color: #0a0a0a;
+  font-weight: 800;
+  font-size: 108px !important;
+  text-align: center;
+}
+
+
+/* Make text visible on inputs */
+.shiny-input-container {
+  color: #474747;
+}
+
+.main-header .navbar{
+background-color: #FAE255 !important;
+}
+
+.main-header span{
+color: black!important;
+font-family: 'Poppins';
+}
+
+.dashboardHeader{
+  display: none;
+}
+
+.main-header .logo {
+    display: none !important};
+
+.sidebar-menu>li>a {
+  border: 0px !important;
+}
+
+.skin-blue .main-header .navbar .sidebar-toggle {
+    color: #e9e8ea!important;
+    background: #FAE255;
+}
+
+.skin-blue .sidebar-menu>li.active>a, .skin-blue .sidebar-menu>li:hover>a  {
+    color: #E9E8Ea !important;
+    background: #666666 !important;
+  
+}
+
+.skin-blue .main-header .navbar .sidebar-toggle:hover {
+    background-color: #666666;
+}
+
+.logo{
+  background-color: #FAE255 !important;
+}
+
+
+.skin-blue .sidebar-menu>li.active>a, .skin-blue .sidebar-menu>li:hover>a {
+    border-left-color: #FAE255 !important;
+}
+
+hr{
+  border: 3px solid #0a0a0a;
+  
+}
+
+
+@media all and (max-width: 400px) {
+  .container-fluid {
+    padding-right: 10px !important;
+    padding-left: 10px !important;
+    margin-right: auto !important;
+    margin-left: auto !important;
+    }
+  
+}
+
+
+

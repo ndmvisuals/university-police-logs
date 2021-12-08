@@ -1,0 +1,13 @@
+name: police-app-arrests
+title: police-app-arrests
+username:
+account: nickmcmillan
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 5252605
+bundleId: 5340172
+url: https://nickmcmillan.shinyapps.io/police-app-arrests/
+when: 1638892021.25753
+lastSyncTime: 1638892021.25753
+asMultiple: FALSE
+asStatic: FALSE

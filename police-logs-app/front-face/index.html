@@ -1,0 +1,126 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- <link rel="stylesheet" href="styles.css"> -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin="" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- <script language="JavaScript" type="text/javascript" src="/js/jquery-ui-personalized-1.5.2.packed.js"></script> -->
+  <script type="text/javascript" src="https://unpkg.com/chroma-js@2.1.2/chroma.js"></script>
+
+  <title>University of Maryland Police Arrests Dashboard</title>
+
+  <meta name="description" content="Merrill College of Journalism, UMD">
+  <meta name="author" content="CNS Maryland">
+
+  <link rel="stylesheet" type="text/css" href="styles.css">
+
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="http://cnsmaryland.org/">
+      <img src="logo.png" id="logo">
+    </a>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link active" href="#">Dashboard <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="#method">Methodology</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+
+
+    <br><br>
+    <h1> Opening up University of Maryland <br /><span>police logs</span></h1>
+
+
+    <hr>
+
+    <h5>Examine crime statistics reported by the University of Maryland Police Department. This dashboard displays daily
+      crime and incident logs, which are scraped from the University of Maryland Police Department. It also displays
+      daily arrest ledgers, which provide basic information on all arrests processed by UMPD for the past few arrests,
+      updated daily. Data is updated automatically every day at 9 a.m.
+    </h5>
+
+
+
+    <!-- <p>
+      This dashboard displays daily crime and incident logs, which are scraped from the <a
+        href="https://www.umpd.umd.edu/stats/"> University of Maryland Police
+        Department</a>. The dashboard also displays daily arrest ledgers, which provide basic information on all arrests
+      processed by UMPD for the past few arrests, updated daily.
+    </p> -->
+
+
+    <iframe src="https://nickmcmillan.shinyapps.io/police-app-arrests/?allowPopout=TRUE" width="100%" height="1100px"
+      style="border:none" scrolling="yes" ; style="overflow: hidden">
+    </iframe>
+
+
+
+
+
+
+    <div class="container method">
+      <hr id="method">
+      <p><strong>Methodology:</strong></p>
+      <p>The University of Maryland Police Department publishes daily crime and incident logs, which provide basic
+        information on all calls for service the police department responds to. Capital News Service built a web scraper
+        to parses through and collects this data every day and displays it on this dashboard. </p>
+      <p>Incident type comes from matching UMPD case numbers to crime log. However, if the incident is not included in
+        the crime log, it is classified as N/A.</p>
+      <p><strong>Site credits:</strong></p>
+      <p>Nick McMillan and Aadit Tambe</p>
+      <p><strong>Source:</strong></p>
+      <p><a href="https://www.umpd.umd.edu/stats/">University of Maryland, College Park Police Department</a></p>
+
+    </div>
+
+  </div>
+  <div class="footer">
+    <p>Copyright 2021 © Capital News Service</p>
+  </div>
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"
+    crossorigin="anonymous"></script>
+
+</body>
+
+</html>

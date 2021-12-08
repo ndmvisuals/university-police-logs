@@ -1,0 +1,13 @@
+name: police-app
+title: police-app
+username:
+account: nickmcmillan
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 4905807
+bundleId: 5162848
+url: https://nickmcmillan.shinyapps.io/police-app/
+when: 1634828224.19339
+lastSyncTime: 1634828224.19342
+asMultiple: FALSE
+asStatic: FALSE

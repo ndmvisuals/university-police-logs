@@ -1,0 +1,9 @@
+*{
+    display: none; 
+}
+
+body{
+    font-size: 30px !important;
+    /* display: none; */
+    /* font-size: 2px; */
+}
