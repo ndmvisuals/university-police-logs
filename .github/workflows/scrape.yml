@@ -23,12 +23,12 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     - name: Set up Python
+      uses: actions/checkout@v2
       uses: actions/setup-python@v2
       with:
         python-version: '3.x'
     - name: Install requirements
       run: python -m pip install requests pandas beautifulsoup4 tabula-py
-    - uses: actions/checkout@v2
     - name: scrape
       run: python webscrapers/scraper.py
     - name: fetch
