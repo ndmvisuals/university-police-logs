@@ -1,0 +1,142 @@
+---
+title: "Title Goes Here"
+author: "Names Go Here" 
+output:
+  html_document:
+    theme: cerulean
+    code_folding: hide
+    toc: true
+    toc_float: true
+    toc_depth: 3
+    df_print: paged
+  md_document:
+    variant: markdown_github
+    toc: true
+    toc_depth: 3
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+
+
+## Load Libraries, Settings and Global Functions
+```{r warning=FALSE,error=FALSE,message=FALSE}
+# For general data science
+
+
+# For data cleaning
+library(janitor)
+
+# For loading Excel files
+library(readxl)
+
+# For working with datetime
+library(lubridate)
+
+library(jsonlite)
+
+# For U.S. Census Bureau data
+#library(tigris)
+
+# For pretty tables
+#library(kableExtra)
+library(knitr)
+library(plotly)
+library(tidyverse)
+
+## Functions 
+
+# Function for formatted table output
+
+output_formatted_table = function(table, text){
+  
+  table %>% 
+    kable(caption = text) %>%
+    kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), font_size = 14, fixed_thead = T) %>%
+    scroll_box(width = "100%")
+}
+
+```
+## Load and Clean Data
+
+```{r}
+# UMD
+umd_police_arrest_data <- read_csv("../data/handmade/umd/umd_police_arrest_data_2021-12-07.csv")
+umd_police_incident_data <- read_csv("../data/handmade/umd/umd_police_incident_data_2021-12-07.csv")
+
+
+
+
+```
+
+## Clean
+
+```{r}
+
+# Clean UMD
+umd_police_arrest_data_clean = umd_police_arrest_data %>% 
+  mutate(date = substr(arrested_date_time_charge,1,8)) %>% 
+  rowwise() %>% 
+  mutate(time = strsplit(arrested_date_time_charge," ")[[1]][2]) %>% 
+  mutate(date = mdy(date), year = year(date), month = month(date)) %>% 
+  select(-c(1)) %>% 
+  mutate(time_list = (str_split(time,":"))) %>% 
+  mutate(time_hour = time_list[[1]]) %>% 
+  filter(year >= 2014) %>% 
+  select(-time_list)
+
+umd_police_incident_data_clean = umd_police_incident_data %>% 
+  mutate(date = substr(occured_date_time_location, 1,8)) %>% 
+  rowwise() %>% 
+  mutate(time = strsplit(occured_date_time_location, " ")[[1]][2]) %>% 
+  mutate(date = mdy(date)) %>% 
+  mutate(year = year(date)) %>%
+  mutate(time_list = (str_split(time,":"))) %>% 
+  mutate(time_hour = time_list[[1]]) %>% 
+  rename(type = "_type") %>% 
+  filter(year >= 2014)
+
+## get incident_type for arrest data
+
+umpd_incident_type = umd_police_incident_data_clean %>% 
+  select(umpd_case_number, type) %>% 
+  distinct(umpd_case_number, type)
+
+
+umd_police_arrest_data_clean_with_type = left_join(umd_police_arrest_data_clean, umpd_incident_type, by = "umpd_case_number")
+  
+
+write_rds(umd_police_arrest_data_clean_with_type, "../police-app-arrests/umd_arrest.rds")
+write_rds(umd_police_incident_data_clean, "../police-app-arrests/umd_incident.rds")
+
+
+#### data for arrest totals
+cases_by_year = umd_police_arrest_data_clean_with_type %>% 
+  distinct(umpd_case_number, .keep_all = TRUE) %>% 
+  group_by(year, type) %>% 
+  summarise(number = n()) %>% 
+  dplyr::ungroup() %>% 
+  dplyr::group_by(year) %>% 
+  slice_max(order_by = number, n = 3) %>% 
+  mutate(top_3 = "yes") %>% 
+  select(-number)
+
+cases_by_year_og = umd_police_arrest_data_clean_with_type %>% 
+  distinct(umpd_case_number, .keep_all = TRUE) %>% 
+  group_by(year, type) %>% 
+  summarise(number = n()) 
+
+arrest_combined = left_join(cases_by_year_og, cases_by_year, by = c("year", "type")) %>% 
+  mutate(top_3 = ifelse(is.na(top_3), "no", top_3)) %>% 
+  mutate(final_type = ifelse(top_3 == "yes", type, "Types Other Than Top 3"))
+
+write_rds(arrest_combined, "../police-app-arrests/arrest_combined.rds")
+
+
+
+```
+
+
+
+
