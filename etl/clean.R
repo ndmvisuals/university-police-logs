@@ -1,75 +1,22 @@
----
-title: "Title Goes Here"
-author: "Names Go Here" 
-output:
-  html_document:
-    theme: cerulean
-    code_folding: hide
-    toc: true
-    toc_float: true
-    toc_depth: 3
-    df_print: paged
-  md_document:
-    variant: markdown_github
-    toc: true
-    toc_depth: 3
----
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
-```
-
-
-
-## Load Libraries, Settings and Global Functions
-```{r warning=FALSE,error=FALSE,message=FALSE}
-# For general data science
-
-
 # For data cleaning
+
+install.packages("janitor",repos = "http://cran.us.r-project.org")
+install.packages("lubridate",repos = "http://cran.us.r-project.org")
+install.packages("tidyverse",repos = "http://cran.us.r-project.org")
+
 library(janitor)
-
-# For loading Excel files
-library(readxl)
-
 # For working with datetime
 library(lubridate)
-
-library(jsonlite)
-
-# For U.S. Census Bureau data
-#library(tigris)
-
-# For pretty tables
-#library(kableExtra)
-library(knitr)
-library(plotly)
 library(tidyverse)
 
 ## Functions 
 
 # Function for formatted table output
 
-output_formatted_table = function(table, text){
-  
-  table %>% 
-    kable(caption = text) %>%
-    kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), font_size = 14, fixed_thead = T) %>%
-    scroll_box(width = "100%")
-}
 
-```
-## Load and Clean Data
 
-```{r}
-# UMD
-umd_police_arrest_data <- read_csv("../data/raw/arrests_data.csv")
-umd_police_incident_data <- read_csv("../data/raw/incidents_data.csv")
-
-```
-
-## Clean
-
-```{r}
+umd_police_arrest_data <- read_csv(paste0("../data/raw/arrests_data_", today(),".csv"))
+umd_police_incident_data <- read_csv(paste0("../data/raw/incidents_data_", today(),".csv"))
 
 # Clean UMD
 umd_police_arrest_data_clean = umd_police_arrest_data %>% 
@@ -102,9 +49,6 @@ umpd_incident_type = umd_police_incident_data_clean %>%
 
 
 umd_police_arrest_data_clean_with_type = left_join(umd_police_arrest_data_clean, umpd_incident_type, by = "umpd_case_number")
-  
-
-
 
 
 #### data for arrest totals
@@ -131,12 +75,21 @@ write_rds(arrest_combined, "../police-logs-app/data/arrest_combined.rds")
 write_rds(umd_police_arrest_data_clean_with_type, "../police-logs-app/data/umd_arrest.rds")
 write_rds(umd_police_incident_data_clean, "../police-logs-app/data/umd_incident.rds")
 
-write_csv(arrest_combined, paste0("../data/processed/arrest_combined" , today() , ".csv"))
-write_csv(umd_police_arrest_data_clean_with_type, paste0("../data/processed/umd_arrest.rds" , today() , ".csv"))
+write_csv(arrest_combined, paste0("../data/processed/arrest_combined_" , today() , ".csv"))
+write_csv(umd_police_arrest_data_clean_with_type, paste0("../data/processed/umd_arrest_" , today() , ".csv"))
 write_csv(umd_police_incident_data_clean %>% 
-            select(-time_list), paste0("../data/processed/umd_incident.rds" , today() , ".csv"))
+            select(-time_list), paste0("../data/processed/umd_incident_" , today() , ".csv"))
 
-```
+
+
+
+
+
+
+
+
+
+
 
 
 
