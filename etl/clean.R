@@ -1,13 +1,13 @@
 # For data cleaning
 
-install.packages("janitor")#,repos = "http://cran.us.r-project.org")
-install.packages("lubridate") #,repos = "http://cran.us.r-project.org")
-install.packages("tidyverse")#,repos = "http://cran.us.r-project.org")
-
-library('janitor')
-# For working with datetime
-library('lubridate')
-library('tidyverse')
+# install.packages("janitor")#,repos = "http://cran.us.r-project.org")
+# install.packages("lubridate") #,repos = "http://cran.us.r-project.org")
+# install.packages("tidyverse")#,repos = "http://cran.us.r-project.org")
+# 
+# library(janitor)
+# # For working with datetime
+# library(lubridate)
+# library(tidyverse)
 
 ## Functions 
 
