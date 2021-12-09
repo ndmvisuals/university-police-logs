@@ -1,0 +1,13 @@
+name: police-logs-app
+title: police-logs-app
+username:
+account: nickmcmillan
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 5298847
+bundleId: 5350653
+url: https://nickmcmillan.shinyapps.io/police-logs-app/
+when: 1639060857.82951
+lastSyncTime: 1639060857.82951
+asMultiple: FALSE
+asStatic: FALSE
