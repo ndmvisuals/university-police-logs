@@ -13,11 +13,11 @@ library(tidyverse)
 
 # Function for formatted table output
 
-#umd_police_arrest_data <- read_csv("data/raw/arrests_data_2021-12-08.csv")
-#umd_police_incident_data <- read_csv(paste0("data/raw/incidents_data_2021-12-08.csv"))
+# umd_police_arrest_data <- read_csv("data/raw/arrests_data_2021-12-08.csv")
+# umd_police_incident_data <- read_csv(paste0("data/raw/incidents_data_2021-12-08.csv"))
 
- umd_police_arrest_data <- read_csv(paste0("../data/raw/arrests_data_", today(),".csv"))
- umd_police_incident_data <- read_csv(paste0("../data/raw/incidents_data_", today(),".csv"))
+umd_police_arrest_data <- read_csv(paste0("data/raw/arrests_data_", today(),".csv"))
+umd_police_incident_data <- read_csv(paste0("data/raw/incidents_data_", today(),".csv"))
 
 # Clean UMD
 umd_police_arrest_data_clean = umd_police_arrest_data %>% 
