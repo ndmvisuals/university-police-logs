@@ -10,7 +10,6 @@ import json
 import fnmatch
 import os
 import tabula
-from tabula.io import read_pdf
 from datetime import date
 
 
