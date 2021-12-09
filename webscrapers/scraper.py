@@ -9,8 +9,6 @@ import time
 import json
 import fnmatch
 import os
-import tabula
-from tabula.io import read_pdf
 from datetime import date
 
 
@@ -143,6 +141,9 @@ def scrape_umd_incident(date):
     today = date.today()
     df = pd.DataFrame(data)
     df.to_csv(f"data/raw/incidents_data_{today}.csv")
+    with open(f'action-logs/{time.strftime("%Y%m%d-%H%M%S")}.txt', "w") as f:
+        f.write(
+            f'Scraper successfully ran on {time.strftime("%Y%m%d-%H%M%S")}')
 
 
 today = date.today()

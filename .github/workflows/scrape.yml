@@ -29,10 +29,17 @@ jobs:
         R -e 'install.packages("tidyverse")'
         R -e 'install.packages("lubridate")'
         R -e 'install.packages("janitor")'
-    # Run R script
-    - name: Scrape
-      run: Rscript etl/clean.R
 
+    # set up python
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+    - name: Install requirements
+      run: python -m pip install requests pandas beautifulsoup4
+    - uses: actions/checkout@v2
+    - name: scrape - python
+      run: python webscrapers/scraper.py
 
     - name: clean - r
       run: Rscript etl/clean.R
