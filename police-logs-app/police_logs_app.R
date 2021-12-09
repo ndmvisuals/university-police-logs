@@ -64,11 +64,15 @@ ui <- fluidPage(
                         tabPanel(title = "Data Table",
                                  br(),
                                  fluidRow(
-                                   column(3,selectInput("vars", "Group On: ", names(umd_arrest), multiple = TRUE)),
-                                   column(3,selectInput("group", "One Entry Per: ", list("Arrest/Citation Case", "Person", "nothing")))
+                                   column(3,selectInput("group", "One Entry Per: ", list("Charge","Arrest/Citation Case", "Person"), selected = "Charge")),
+                                   #column(3,selectInput("vars", "Group On: ", names(umd_arrest), multiple = TRUE))
+                                   column(3,htmlOutput("grouping_list"))
+                                   
                                  ),
+                                 br(),
+                                 br(),
                                  fluidRow(
-                                   column(6, DTOutput("umd_arrest_table2"))
+                                   column(12, DTOutput("umd_arrest_table2"))
                                    
                                  )
                         )
@@ -88,23 +92,43 @@ server <- function(input, output, session){
 
   source("./url_allowPopout.R", local = TRUE)
   
-  number_grouping_vars <- reactive(input$vars)
-  grouping_var <- reactive(input$group)
   
-  output$grouping_list = reactive(
+  
+  output$grouping_list = renderUI({
     
-    if(grouping_var == "Person"){
+    if(input$group == "Person"){
       
-      grouping_list_person = c("type","umpd_case_number","race","age","sex","description","date","time","year","month","time_hour" )
+      selectInput(inputId = "vars", #name of input
+                  label = "Group On:", #label displayed in ui
+                  choices = c("type","race","age","sex", "umpd_case_number", "arrest_number","date","time","year","month","time_hour"),
+                  multiple = TRUE)
+      
+      
+    }
+    
+    else if (input$group == "Arrest/Citation Case"){
+      
+      selectInput(inputId = "vars", #name of input
+                  label = "Group On:", #label displayed in ui
+                  choices = c("type","umpd_case_number", "arrest_number", "date","time","year","month","time_hour" ),
+                  multiple = TRUE)
+      
     }
     
     else{
-      grouping_list_case = c("type","umpd_case_number","date","time","year","month","time_hour" )
+      
+      selectInput(inputId = "vars", #name of input
+                  label = "Group On:", #label displayed in ui
+                  choices = c("Cannot group - please choose arrest/citation case or person"))
+      
+      
     }
-  )
+    
+    
+  })
   
-  
-  
+  number_grouping_vars <- reactive(input$vars)
+  grouping_var <- reactive(input$group)
   
   
  df_umd_arrest_year <- reactive({
@@ -330,35 +354,8 @@ server <- function(input, output, session){
   
   interactive_table = function(df, num_variables, grouping_variable){
     
-    if(grouping_variable == "nothing"){
-      
-      df = df %>% 
-        select(-arrested_date_time_charge)
-      
-      if(num_variables < 1){
-        
-        result = df
-        return (result)
-        
-      }
-      
-      else{
-        result = df %>% 
-          group_by(across(all_of(input$vars))) %>% 
-          summarise(count = n(), .groups = "drop")
-        
-        return (result)
-        
-        
-      } 
-      
-      
-      
-      
-      
-    }
     
-    else if(grouping_variable == "Person"){
+    if(grouping_variable == "Person"){
       
       df = df %>% 
         select(-arrested_date_time_charge)
@@ -366,7 +363,8 @@ server <- function(input, output, session){
       if(num_variables < 1){
         
         result = df %>% 
-          distinct(race, .keep_all = TRUE)
+          distinct(arrest_number, .keep_all = TRUE) %>% 
+          select(-description)
         return (result)
         
       }
@@ -374,6 +372,7 @@ server <- function(input, output, session){
       else{
         result = df %>% 
           distinct(arrest_number, .keep_all = TRUE) %>% 
+          select(-description) %>% 
           group_by(across(all_of(input$vars))) %>% 
           summarise(count = n(), .groups = "drop")
         
@@ -387,7 +386,7 @@ server <- function(input, output, session){
       
     }
     
-    else{
+    else if(grouping_variable == "Arrest/Citation Case") {
       
       df = df %>% 
         select(-arrested_date_time_charge)
@@ -395,7 +394,9 @@ server <- function(input, output, session){
       if(num_variables < 1){
         
         result = df %>% 
-          distinct(umpd_case_number, .keep_all = TRUE)
+          distinct(umpd_case_number, .keep_all = TRUE) %>% 
+          select(-race, -age, -sex, -description, -arrest_number) %>% 
+          relocate(type, .after = umpd_case_number)
         return (result)
         
       }
@@ -403,6 +404,7 @@ server <- function(input, output, session){
       else{
         result = df %>% 
           distinct(umpd_case_number, .keep_all = TRUE) %>% 
+          select(-race, -age, -sex, -description, -arrest_number) %>% 
           group_by(across(all_of(input$vars))) %>% 
           summarise(count = n(), .groups = "drop")
         
@@ -413,6 +415,24 @@ server <- function(input, output, session){
       
       
     }
+    
+    
+    else{
+      
+      result = df %>% 
+        select(-arrested_date_time_charge)
+      
+      return (result)
+      
+      
+      
+      
+      
+      
+    }
+    
+    
+    
     
     
     
