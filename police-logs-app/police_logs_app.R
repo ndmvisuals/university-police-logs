@@ -65,7 +65,7 @@ ui <- fluidPage(
                                  br(),
                                  fluidRow(
                                    column(3,selectInput("group", "One Entry Per: ", list("Charge","Arrest/Citation Case", "Person"), selected = "Charge")),
-                                   #column(3,selectInput("vars", "Group On: ", names(umd_arrest), multiple = TRUE))
+                                   #column(3,selectInput("vars", "Group By: ", names(umd_arrest), multiple = TRUE))
                                    column(3,htmlOutput("grouping_list"))
                                    
                                  ),
