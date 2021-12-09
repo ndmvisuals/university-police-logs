@@ -13,10 +13,11 @@ library(tidyverse)
 
 # Function for formatted table output
 
+umd_police_arrest_data <- read_csv("data/raw/arrests_data_2021-12-08.csv")
+umd_police_incident_data <- read_csv(paste0("data/raw/incidents_data_2021-12-08.csv"))
 
-
-umd_police_arrest_data <- read_csv(paste0("../data/raw/arrests_data_", today(),".csv"))
-umd_police_incident_data <- read_csv(paste0("../data/raw/incidents_data_", today(),".csv"))
+# umd_police_arrest_data <- read_csv(paste0("../data/raw/arrests_data_", today(),".csv"))
+# umd_police_incident_data <- read_csv(paste0("../data/raw/incidents_data_", today(),".csv"))
 
 # Clean UMD
 umd_police_arrest_data_clean = umd_police_arrest_data %>% 
@@ -71,14 +72,14 @@ arrest_combined = left_join(cases_by_year_og, cases_by_year, by = c("year", "typ
   mutate(top_3 = ifelse(is.na(top_3), "no", top_3)) %>% 
   mutate(final_type = ifelse(top_3 == "yes", type, "Types Other Than Top 3"))
 
-write_rds(arrest_combined, "../police-logs-app/data/arrest_combined.rds")
-write_rds(umd_police_arrest_data_clean_with_type, "../police-logs-app/data/umd_arrest.rds")
-write_rds(umd_police_incident_data_clean, "../police-logs-app/data/umd_incident.rds")
+write_rds(arrest_combined, "police-logs-app/data/arrest_combined.rds")
+write_rds(umd_police_arrest_data_clean_with_type, "police-logs-app/data/umd_arrest.rds")
+write_rds(umd_police_incident_data_clean, "police-logs-app/data/umd_incident.rds")
 
-write_csv(arrest_combined, paste0("../data/processed/arrest_combined_" , today() , ".csv"))
-write_csv(umd_police_arrest_data_clean_with_type, paste0("../data/processed/umd_arrest_" , today() , ".csv"))
+write_csv(arrest_combined, paste0("data/processed/arrest_combined_" , today() , ".csv"))
+write_csv(umd_police_arrest_data_clean_with_type, paste0("data/processed/umd_arrest_" , today() , ".csv"))
 write_csv(umd_police_incident_data_clean %>% 
-            select(-time_list), paste0("../data/processed/umd_incident_" , today() , ".csv"))
+            select(-time_list), paste0("data/processed/umd_incident_" , today() , ".csv"))
 
 
 
