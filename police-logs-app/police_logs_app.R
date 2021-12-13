@@ -30,8 +30,8 @@ single_color = "#990000"
 
 
 ui <- fluidPage(
-  tags$head(
-    tags$link(rel = "stylesheet", type = "text/css", href = "dark_mode.css")),
+  #tags$head(
+    #tags$link(rel = "stylesheet", type = "text/css", href = "dark_mode.css")),
   
   ##########
   ## Page 1
@@ -57,7 +57,8 @@ ui <- fluidPage(
                                  ),
                                  br(),
                                  fluidRow(
-                                   column(12, plotOutput("umd_arrest_time_graph"))
+                                   column(6, plotOutput("umd_arrest_time_graph")),
+                                   column(6, plotOutput("umd_arrest_day_graph"))
                                  ),
                                  br()
                         ),
@@ -77,7 +78,43 @@ ui <- fluidPage(
                                    column(12, DTOutput("umd_arrest_table2"))
                                    
                                  )
-                        )
+                        ),
+                        
+                        tabPanel(title = "About/Download Data",
+                                 sidebarLayout(
+                                   
+                                   sidebarPanel(
+                                     
+                                     selectInput("dataset_to_download", "Data",
+                                                 choices = c("UMPD Arrest Report Ledger")),
+                                     
+                                     # Button
+                                     downloadButton("downloadData", "Download")
+                                     
+                                     
+                                     
+                                   ),
+                                   mainPanel(
+                                     br(),
+                                     tags$p("The University of Maryland Police Department publishes", a("daily crime and incident logs", href = "https://www.umpd.umd.edu/stats/incident_logs.cfm" ),
+                                       "which provide basic information on all calls for service the police department responds to,
+                                       and", a("arrest report ledgers", href = "https://www.umpd.umd.edu/stats/arrest_report.cfm"), "which provides basic information on arrests and citations.
+                                       Capital News Service built a web scraper to download and aggregate this data daily and display it on this dashboard.
+                                       The GitHub repository that runs the scraper and archives the data can be found", a("here", href = "https://github.com/ndmvisuals/university-police-logs")),
+                                     
+                                     tags$p("If a service call results in an arrest or citation, then the UMPD case number will appear in the arrest ledger.
+                                       In order to classify the primary type of the arrest/citation, the crime and incident log is joined to the arrest ledger by UMPD case number.
+                                       However, if the case number is not included in the crime and incident log, it's type is classified as N/A.
+                                       A UMPD case number that appears in the arrest ledger could have multiple charges that differ from the single classification in the crime and incident log.")
+                                     
+                                     
+                                     
+                                   )
+                                 
+                                 
+                                 
+                                 
+                                 )
                         
                       )
                       
@@ -85,6 +122,7 @@ ui <- fluidPage(
                       
                       
   )
+)
 )
     
 
@@ -102,7 +140,7 @@ server <- function(input, output, session){
       
       selectInput(inputId = "vars", #name of input
                   label = "Group On:", #label displayed in ui
-                  choices = c("type","race","age","sex", "umpd_case_number", "arrest_number","date","time","year","month","time_hour"),
+                  choices = c("type","race","age","sex", "umpd_case_number", "arrest_number","date","time","week_day","year","month","time_hour"),
                   multiple = TRUE)
       
       
@@ -112,7 +150,7 @@ server <- function(input, output, session){
       
       selectInput(inputId = "vars", #name of input
                   label = "Group On:", #label displayed in ui
-                  choices = c("type","umpd_case_number", "arrest_number", "date","time","year","month","time_hour" ),
+                  choices = c("type","umpd_case_number", "arrest_number", "date","time","week_day","year","month","time_hour" ),
                   multiple = TRUE)
       
     }
@@ -132,6 +170,8 @@ server <- function(input, output, session){
   number_grouping_vars <- reactive(input$vars)
   grouping_var <- reactive(input$group)
   
+  
+ ####### Graph 1 Top Left Arrest Citation Cases by Year ################################# 
   
  df_umd_arrest_year <- reactive({
     #print(input$select_crime_hu) 
@@ -193,7 +233,7 @@ server <- function(input, output, session){
   
   
   
-  ##############  Race ################
+  ####### Graph 2 Top Right Arrest Citation Cases by Race ################################# 
   
   race_grouping <- reactive({
     if(input$checkbox_race == FALSE){
@@ -304,10 +344,10 @@ server <- function(input, output, session){
   
   
   
-  ##########################
+  ####### Graph 3 Bottom Left Arrest Citation Cases by Time of Day ################################# 
   
   
-  # UMD Time arrest ---------------------------------
+ 
   
   
   df_umd_arrest_time = reactive({
@@ -325,7 +365,9 @@ server <- function(input, output, session){
     
     else{
       
-      result_umd_arrest_time = umd_arrest[umd_arrest$type == input$select_incident,]  %>% drop_na(type) %>% 
+      result_umd_arrest_time = umd_arrest[umd_arrest$type == input$select_incident,]  %>% 
+        drop_na(type) %>% 
+        distinct(year, umpd_case_number, .keep_all = TRUE) %>% 
         group_by(time_hour) %>% 
         count()
       
@@ -352,6 +394,54 @@ server <- function(input, output, session){
     
   })
   
+  
+  
+  
+  ####### Graph 4 Bottom Right Arrest Citation Cases by Day of Week ################################# 
+  
+  df_umd_arrest_day = reactive({
+    
+    req(input$select_incident)
+    if(input$select_incident == all_incident){
+      
+      result_umd_arrest_day = umd_arrest %>% 
+        distinct(year, umpd_case_number, .keep_all = TRUE) %>% 
+        group_by(week_day) %>% 
+        count()
+      
+      
+    }
+    
+    else{
+      
+      result_umd_arrest_day = umd_arrest[umd_arrest$type == input$select_incident,]  %>% 
+        drop_na(type) %>% 
+        distinct(year, umpd_case_number, .keep_all = TRUE) %>% 
+        group_by(week_day) %>% 
+        count()
+      
+      
+      
+    }
+  })
+  
+  output$umd_arrest_day_graph =renderPlot({
+    
+    ggplot(df_umd_arrest_day(), aes(x=week_day, y=`n`, fill = single_color)) +
+      geom_bar(stat="identity") +
+      labs(x = "Day of Week", y = "Number of Arrest/Citations",
+           title =  paste0("Primary Incident Type: ", input$select_incident),
+           subtitle = paste0("Arrest/Citation Cases By Day of Week From ", toString(min_year), "-", toString(max_year)))+
+      
+      theme_ipsum_rc(grid="Y")+
+      #scale_x_discrete( labels = c("12 a.m.", "1 a.m.", "2 a.m.", "3 a.m.", "4 a.m.", "5 a.m.", "6 a.m.", "7 a.m.","8 a.m.", "9 a.m.", "10 a.m.", "11 a.m.",
+                                   #"12 p.m.", "1 p.m.", "2 p.m.", "3 p.m.", "4 p.m.", "5 p.m.", "6 p.m.", "7 p.m.","8 p.m.", "9 p.m.", "10 p.m.", "11 p.m."))+
+      theme(legend.position = "none")
+    
+    
+    
+    
+  })
   
   
   
@@ -462,6 +552,20 @@ server <- function(input, output, session){
         )
         
       )
+  
+  
+  
+  ##### Downloadable data
+  
+  # Downloadable csv of selected dataset ----
+  output$downloadData <- downloadHandler(
+    filename = function() {
+      paste(input$dataset_to_download, ".csv", sep = "")
+    },
+    content = function(file) {
+      write.csv(umd_arrest, file, row.names = FALSE)
+    }
+  )
       
 }
 
