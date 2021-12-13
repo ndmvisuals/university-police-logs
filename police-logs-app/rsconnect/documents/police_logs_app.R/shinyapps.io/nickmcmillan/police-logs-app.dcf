@@ -5,9 +5,9 @@ account: nickmcmillan
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 5298847
-bundleId: 5366566
+bundleId: 5366643
 url: https://nickmcmillan.shinyapps.io/police-logs-app/
-when: 1639402722.10508
-lastSyncTime: 1639402722.10508
+when: 1639404276.72943
+lastSyncTime: 1639404276.72943
 asMultiple: FALSE
 asStatic: FALSE
