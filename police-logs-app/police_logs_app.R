@@ -1,14 +1,5 @@
-library(shiny)
-library(shinydashboard)
-library(tidyverse)
-library(DT)
-library(rsconnect)
-library(janitor)
-#library(plotly)
-library(DT)
-library(gcookbook)
-library(hrbrthemes)
-library(RColorBrewer)
+
+
 
 
 umd_arrest = readRDS("./data/umd_arrest.rds")
@@ -35,7 +26,7 @@ ui <- fluidPage(
   ## Page 1
   ##########
   navbarPage("University of Maryland Police Log Explorer", 
-             tabPanel("UMD Arrest/Citations",
+            
                       tabsetPanel(
                         tabPanel(title = "Charts",
                                  uiOutput("url_allow_popout_UI"),
@@ -81,7 +72,7 @@ ui <- fluidPage(
                       
                       
                       
-                      )
+                      
   )
 )
     
@@ -186,52 +177,7 @@ server <- function(input, output, session){
   
 })
   
-  # UMD Time arrest ---------------------------------
-  
-  
-  df_umd_arrest_time = reactive({
-    
-    req(input$select_incident)
-    if(input$select_incident == all_incident){
-      
-      result_umd_arrest_time = umd_arrest %>% 
-        distinct(year, umpd_case_number, .keep_all = TRUE) %>% 
-        group_by(time_hour) %>% 
-        count()
-      
-      
-    }
-    
-    else{
-      
-      result_umd_arrest_time = umd_arrest[umd_arrest$type == input$select_incident,]  %>% drop_na(type) %>% 
-        group_by(time_hour) %>% 
-        count()
-      
-      
-      
-    }
-    })
-  
-  output$umd_arrest_time_graph =renderPlot({
-
-    ggplot(df_umd_arrest_time(), aes(x=time_hour, y=`n`, fill = single_color)) +
-      geom_bar(stat="identity") +
-      labs(x = "Time", y = "Number of Arrest/Citations",
-           title =  paste0("Primary Incident Type: ", input$select_incident),
-           subtitle = paste0("Arrest/Citation Cases By Time of Day From ", toString(min_year), "-", toString(max_year)))+
-
-      theme_ipsum_rc(grid="Y")+
-      scale_x_discrete( labels = c("12 a.m.", "1 a.m.", "2 a.m.", "3 a.m.", "4 a.m.", "5 a.m.", "6 a.m.", "7 a.m.","8 a.m.", "9 a.m.", "10 a.m.", "11 a.m.",
-                                   "12 p.m.", "1 p.m.", "2 p.m.", "3 p.m.", "4 p.m.", "5 p.m.", "6 p.m.", "7 p.m.","8 p.m.", "9 p.m.", "10 p.m.", "11 p.m."))+
-      theme(legend.position = "none")
-
-
-
-
-  })
-
-  
+ 
   
   
   
@@ -344,6 +290,58 @@ server <- function(input, output, session){
     
     
   })
+  
+  
+  
+  ##########################
+  
+  
+  # UMD Time arrest ---------------------------------
+  
+  
+  df_umd_arrest_time = reactive({
+    
+    req(input$select_incident)
+    if(input$select_incident == all_incident){
+      
+      result_umd_arrest_time = umd_arrest %>% 
+        distinct(year, umpd_case_number, .keep_all = TRUE) %>% 
+        group_by(time_hour) %>% 
+        count()
+      
+      
+    }
+    
+    else{
+      
+      result_umd_arrest_time = umd_arrest[umd_arrest$type == input$select_incident,]  %>% drop_na(type) %>% 
+        group_by(time_hour) %>% 
+        count()
+      
+      
+      
+    }
+  })
+  
+  output$umd_arrest_time_graph =renderPlot({
+    
+    ggplot(df_umd_arrest_time(), aes(x=time_hour, y=`n`, fill = single_color)) +
+      geom_bar(stat="identity") +
+      labs(x = "Time", y = "Number of Arrest/Citations",
+           title =  paste0("Primary Incident Type: ", input$select_incident),
+           subtitle = paste0("Arrest/Citation Cases By Time of Day From ", toString(min_year), "-", toString(max_year)))+
+      
+      theme_ipsum_rc(grid="Y")+
+      scale_x_discrete( labels = c("12 a.m.", "1 a.m.", "2 a.m.", "3 a.m.", "4 a.m.", "5 a.m.", "6 a.m.", "7 a.m.","8 a.m.", "9 a.m.", "10 a.m.", "11 a.m.",
+                                   "12 p.m.", "1 p.m.", "2 p.m.", "3 p.m.", "4 p.m.", "5 p.m.", "6 p.m.", "7 p.m.","8 p.m.", "9 p.m.", "10 p.m.", "11 p.m."))+
+      theme(legend.position = "none")
+    
+    
+    
+    
+  })
+  
+  
   
   
   ###############Table######################

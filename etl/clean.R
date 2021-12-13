@@ -24,7 +24,7 @@ umd_police_arrest_data_clean = umd_police_arrest_data %>%
   mutate(date = substr(arrested_date_time_charge,1,8)) %>% 
   rowwise() %>% 
   mutate(time = strsplit(arrested_date_time_charge," ")[[1]][2]) %>% 
-  mutate(date = mdy(date), year = year(date), month = month(date)) %>% 
+  mutate(date = mdy(date), year = year(date), month = month(date),  week_day = wday(date,  label = TRUE, abbr = TRUE)) %>% 
   select(-c(1)) %>% 
   mutate(time_list = (str_split(time,":"))) %>% 
   mutate(time_hour = time_list[[1]]) %>% 
