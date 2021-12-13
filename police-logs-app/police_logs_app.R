@@ -1,4 +1,14 @@
-
+library(shiny)
+library(shinydashboard)
+library(tidyverse)
+library(DT)
+library(rsconnect)
+library(janitor)
+#library(plotly)
+library(DT)
+library(gcookbook)
+library(hrbrthemes)
+library(RColorBrewer)
 
 
 
@@ -8,6 +18,7 @@ umd_arrest_combined = readRDS("./data/arrest_combined.rds")
 umd_arrest_list = unique(umd_arrest$type)
 all_incident = "All"
 umd_arrest_list = c(all_incident, umd_arrest_list)
+umd_arrest_list = umd_arrest_list[is.na(umd_arrest_list) == FALSE]
 ls_years = unique(umd_arrest$year)
 min_year = min(ls_years)
 max_year = max(ls_years)
@@ -362,7 +373,7 @@ server <- function(input, output, session){
         
         result = df %>% 
           distinct(arrest_number, .keep_all = TRUE) %>% 
-          select(-description)
+          select(-charge)
         return (result)
         
       }
@@ -370,7 +381,7 @@ server <- function(input, output, session){
       else{
         result = df %>% 
           distinct(arrest_number, .keep_all = TRUE) %>% 
-          select(-description) %>% 
+          select(-charge) %>% 
           group_by(across(all_of(input$vars))) %>% 
           summarise(count = n(), .groups = "drop")
         
@@ -393,7 +404,7 @@ server <- function(input, output, session){
         
         result = df %>% 
           distinct(umpd_case_number, .keep_all = TRUE) %>% 
-          select(-race, -age, -sex, -description, -arrest_number) %>% 
+          select(-race, -age, -sex, -charge, -arrest_number) %>% 
           relocate(type, .after = umpd_case_number)
         return (result)
         
@@ -402,7 +413,7 @@ server <- function(input, output, session){
       else{
         result = df %>% 
           distinct(umpd_case_number, .keep_all = TRUE) %>% 
-          select(-race, -age, -sex, -description, -arrest_number) %>% 
+          select(-race, -age, -sex, -charge, -arrest_number) %>% 
           group_by(across(all_of(input$vars))) %>% 
           summarise(count = n(), .groups = "drop")
         
