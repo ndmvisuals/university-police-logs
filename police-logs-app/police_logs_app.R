@@ -94,18 +94,18 @@ ui <- fluidPage(
                                    ),
                                    mainPanel(
                                      br(),
-                                     tags$p("The University of Maryland Police Department publishes", a("daily crime and incident logs", href = "https://www.umpd.umd.edu/stats/incident_logs.cfm" ),
+                                     tags$p("The University of Maryland Police Department publishes", a("daily crime and incident logs", href = "https://www.umpd.umd.edu/stats/incident_logs.cfm", target="_blank" ),
                                        "which provide basic information on all calls for service the police department responds to,
-                                       and", a("arrest report ledgers", href = "https://www.umpd.umd.edu/stats/arrest_report.cfm"), "which provides basic information on arrests and citations.
-                                       Capital News Service built a web scraper to download and aggregate this data daily and display it on this dashboard.
-                                       The GitHub repository that runs the scraper and archives the data can be found", a("here", href = "https://github.com/ndmvisuals/university-police-logs")),
+                                       and", a("arrest report ledgers", href = "https://www.umpd.umd.edu/stats/arrest_report.cfm", target="_blank"), "which provides basic information on arrests and citations."),
+                                     
+                                       tags$p("Capital News Service built a web scraper to download and aggregate this data daily and display it on this dashboard. See the GitHub repository - that runs the scraper and archives the data -", a("here.", href = "https://github.com/ndmvisuals/university-police-logs", target="_blank")),
                                      
                                      tags$p("If a service call results in an arrest or citation, then the UMPD case number will appear in the arrest ledger.
                                        In order to classify the primary type of the arrest/citation, the crime and incident log is joined to the arrest ledger by UMPD case number.
                                        However, if the case number is not included in the crime and incident log, it's type is classified as N/A.
                                        A UMPD case number that appears in the arrest ledger could have multiple charges that differ from the single classification in the crime and incident log.")
                                      
-                                     
+                                 )
                                      
                                    )
                                  
@@ -120,8 +120,10 @@ ui <- fluidPage(
                       
                       
   )
+  
 )
-)
+
+
     
 
 server <- function(input, output, session){
