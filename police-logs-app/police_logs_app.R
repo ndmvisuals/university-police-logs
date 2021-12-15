@@ -12,11 +12,14 @@ library(RColorBrewer)
 
 # Read in Data
 
-umd_arrest = readRDS("./data/umd_arrest.rds")
-umd_arrest_combined = readRDS("./data/arrest_combined.rds")
+#umd_arrest = readRDS("./data/umd_arrest.rds")
+#umd_arrest_combined = readRDS("./data/arrest_combined.rds")
 
+#umd_arrest = read.csv("https://raw.githubusercontent.com/ndmvisuals/university-police-logs/main/police-logs-app/data/umd_arrest.csv")
+#umd_arrest_combined = read.csv("https://raw.githubusercontent.com/ndmvisuals/university-police-logs/main/police-logs-app/data/arrest_combined.csv")
 
-
+umd_arrest = readRDS(url("https://raw.githubusercontent.com/ndmvisuals/university-police-logs/main/police-logs-app/data/umd_arrest.rds"))
+umd_arrest_combined =  readRDS(url("https://raw.githubusercontent.com/ndmvisuals/university-police-logs/main/police-logs-app/data/arrest_combined.rds"))
 
 ################## --------------------------
 umd_arrest_list = unique(umd_arrest$type)

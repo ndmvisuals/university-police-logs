@@ -76,10 +76,10 @@ arrest_combined = left_join(cases_by_year_og, cases_by_year, by = c("year", "typ
 write_rds(arrest_combined, "police-logs-app/data/arrest_combined.rds")
 write_rds(umd_police_arrest_data_clean_with_type, "police-logs-app/data/umd_arrest.rds")
 write_rds(umd_police_incident_data_clean, "police-logs-app/data/umd_incident.rds")
-
-write_csv(arrest_combined, "police-logs-app/data/arrest_combined.csv")
-write_csv(umd_police_arrest_data_clean_with_type, "police-logs-app/data/umd_arrest.csv")
-write_csv(umd_police_incident_data_clean, "police-logs-app/data/umd_incident.csv")
+# 
+# write_csv(arrest_combined, "police-logs-app/data/arrest_combined.csv")
+# write_csv(umd_police_arrest_data_clean_with_type, "police-logs-app/data/umd_arrest.csv")
+# write_csv(umd_police_incident_data_clean, "police-logs-app/data/umd_incident.csv")
 
 # Write data with date
 write_csv(arrest_combined, paste0("data/processed/arrest_combined_" , today() , ".csv"))
