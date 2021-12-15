@@ -19,8 +19,7 @@ setAccountInfo(name = error_on_missing_name("SHINY_ACC_NAME"),
                secret = error_on_missing_name("SECRET"))
 # Deploy the application.
 deployApp(
-  appDir = setwd("C:/Users/nicho/Documents/GitHub/university-police-logs"), 
-  appFiles = c("police_logs_app.R", "police-logs-app/data/arrest_combined.rds", "police-logs-app/data/umd_arrest.rds", "police-logs-app/data/umd_incident.rds"),
+  appFiles = c("police-logs-app/police_logs_app.R"),
   appName = error_on_missing_name("MASTERNAME"),
   appTitle = "shinyapplication")
 

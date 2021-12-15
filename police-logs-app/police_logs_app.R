@@ -18,26 +18,6 @@ library(RColorBrewer)
 #umd_arrest = read.csv("https://raw.githubusercontent.com/ndmvisuals/university-police-logs/main/police-logs-app/data/umd_arrest.csv")
 #umd_arrest_combined = read.csv("https://raw.githubusercontent.com/ndmvisuals/university-police-logs/main/police-logs-app/data/arrest_combined.csv")
 
-umd_arrest = readRDS(url("https://raw.githubusercontent.com/ndmvisuals/university-police-logs/main/police-logs-app/data/umd_arrest.rds"))
-umd_arrest_combined =  readRDS(url("https://raw.githubusercontent.com/ndmvisuals/university-police-logs/main/police-logs-app/data/arrest_combined.rds"))
-
-df_latest_scrape_date = readRDS(url("https://raw.githubusercontent.com/ndmvisuals/university-police-logs/main/police-logs-app/data/latest_scrape_date.rds"))
-scrape_date = df_latest_scrape_date$latest[[1]]
-
-
-################## --------------------------
-umd_arrest_list = unique(umd_arrest$type)
-all_incident = "All"
-umd_arrest_list = c(all_incident, umd_arrest_list)
-umd_arrest_list = umd_arrest_list[is.na(umd_arrest_list) == FALSE]
-ls_years = unique(umd_arrest$year)
-min_year = min(ls_years)
-max_year = max(ls_years)
-cns_palette = c("#1979B9", "#FAA916", "#2EC4B6", "#8FD694", "#80217F", "#1979B9")
-all_label = "All"
-
-#color_scheme = "Dark2"
-single_color = "#990000"
 
 
 ui <- fluidPage(
@@ -147,6 +127,26 @@ server <- function(input, output, session){
 
   source("./url_allowPopout.R", local = TRUE)
   
+  umd_arrest = readRDS(url("https://raw.githubusercontent.com/ndmvisuals/university-police-logs/main/police-logs-app/data/umd_arrest.rds"))
+  umd_arrest_combined =  readRDS(url("https://raw.githubusercontent.com/ndmvisuals/university-police-logs/main/police-logs-app/data/arrest_combined.rds"))
+  
+  df_latest_scrape_date = readRDS(url("https://raw.githubusercontent.com/ndmvisuals/university-police-logs/main/police-logs-app/data/latest_scrape_date.rds"))
+  scrape_date = df_latest_scrape_date$latest[[1]]
+  
+  
+  ################## --------------------------
+  umd_arrest_list = unique(umd_arrest$type)
+  all_incident = "All"
+  umd_arrest_list = c(all_incident, umd_arrest_list)
+  umd_arrest_list = umd_arrest_list[is.na(umd_arrest_list) == FALSE]
+  ls_years = unique(umd_arrest$year)
+  min_year = min(ls_years)
+  max_year = max(ls_years)
+  cns_palette = c("#1979B9", "#FAA916", "#2EC4B6", "#8FD694", "#80217F", "#1979B9")
+  all_label = "All"
+  
+  #color_scheme = "Dark2"
+  single_color = "#990000"
   
   
   output$grouping_list = renderUI({
