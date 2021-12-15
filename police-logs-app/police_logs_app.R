@@ -10,9 +10,15 @@ library(hrbrthemes)
 library(RColorBrewer)
 
 
+# Read in Data
 
 umd_arrest = readRDS("./data/umd_arrest.rds")
 umd_arrest_combined = readRDS("./data/arrest_combined.rds")
+
+
+
+
+################## --------------------------
 umd_arrest_list = unique(umd_arrest$type)
 all_incident = "All"
 umd_arrest_list = c(all_incident, umd_arrest_list)
