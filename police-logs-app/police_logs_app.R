@@ -117,7 +117,7 @@ ui <- fluidPage(
                                      
                                      tags$p("If a service call results in an arrest or citation, then the UMPD case number will appear in the arrest ledger.
                                        In order to classify the primary type of the arrest/citation, the crime and incident log is joined to the arrest ledger by UMPD case number.
-                                       However, if the case number is not included in the crime and incident log, it's type is classified as N/A.
+                                       However, if the case number is not included in the crime and incident log, its type is classified as N/A.
                                        A UMPD case number that appears in the arrest ledger could have multiple charges that differ from the single classification in the crime and incident log.")
                                      
                                  )
@@ -395,7 +395,7 @@ server <- function(input, output, session){
     
     ggplot(df_umd_arrest_time(), aes(x=time_hour, y=`n`, fill = single_color)) +
       geom_bar(stat="identity") +
-      labs(x = "Time", y = "Number of Arrest/Citations",
+      labs(x = "Time", y = "Number of UMPD Cases",
            title =  paste0("Primary Incident Type: ", input$select_incident),
            subtitle = paste0("Arrest/Citation Cases By Time of Day From ", toString(min_year), "-", toString(max_year)))+
       
@@ -444,7 +444,7 @@ server <- function(input, output, session){
     
     ggplot(df_umd_arrest_day(), aes(x=week_day, y=`n`, fill = single_color)) +
       geom_bar(stat="identity") +
-      labs(x = "Day of Week", y = "Number of Arrest/Citations",
+      labs(x = "Day of Week", y = "Number of UMPD Cases",
            title =  paste0("Primary Incident Type: ", input$select_incident),
            subtitle = paste0("Arrest/Citation Cases By Day of Week From ", toString(min_year), "-", toString(max_year)))+
       
