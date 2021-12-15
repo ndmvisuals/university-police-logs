@@ -21,6 +21,10 @@ library(RColorBrewer)
 umd_arrest = readRDS(url("https://raw.githubusercontent.com/ndmvisuals/university-police-logs/main/police-logs-app/data/umd_arrest.rds"))
 umd_arrest_combined =  readRDS(url("https://raw.githubusercontent.com/ndmvisuals/university-police-logs/main/police-logs-app/data/arrest_combined.rds"))
 
+df_latest_scrape_date = readRDS(url("https://raw.githubusercontent.com/ndmvisuals/university-police-logs/main/police-logs-app/data/latest_scrape_date.rds"))
+scrape_date = df_latest_scrape_date$latest[[1]]
+
+
 ################## --------------------------
 umd_arrest_list = unique(umd_arrest$type)
 all_incident = "All"
@@ -48,6 +52,8 @@ ui <- fluidPage(
                       tabsetPanel(
                         tabPanel(title = "Charts",
                                  uiOutput("url_allow_popout_UI"),
+                                 br(),
+                                 tags$p(paste0("Data last scraped on: ", scrape_date, " EST")),
                                  br(),
                                  fluidRow(
                                    column(6, selectInput(inputId = "select_incident",
@@ -569,7 +575,7 @@ server <- function(input, output, session){
   # Downloadable csv of selected dataset ----
   output$downloadData <- downloadHandler(
     filename = function() {
-      paste(input$dataset_to_download, ".csv", sep = "")
+      paste(input$dataset_to_download,"_",substr(scrape_date,1,10), ".csv", sep = "")
     },
     content = function(file) {
       write.csv(umd_arrest, file, row.names = FALSE)
