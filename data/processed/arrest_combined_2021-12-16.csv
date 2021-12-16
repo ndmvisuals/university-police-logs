@@ -1,0 +1,243 @@
+year,type,number,top_3,final_type
+2014,Accident,1,no,Types Other Than Top 3
+2014,Alcohol Violation,33,no,Types Other Than Top 3
+2014,Assault,12,no,Types Other Than Top 3
+2014,Burglary,14,no,Types Other Than Top 3
+2014,CDS Violation,213,yes,CDS Violation
+2014,Disorderly Conduct,24,no,Types Other Than Top 3
+2014,Disorderly Conduct (Title IX Related),1,no,Types Other Than Top 3
+2014,DWI/DUI,170,yes,DWI/DUI
+2014,False Report/Statement,2,no,Types Other Than Top 3
+2014,Fraud,5,no,Types Other Than Top 3
+2014,Harassment/Stalking,1,no,Types Other Than Top 3
+2014,Indecent Exposure,1,no,Types Other Than Top 3
+2014,Injured/Sick Person,1,no,Types Other Than Top 3
+2014,Peeping Tom,1,no,Types Other Than Top 3
+2014,Recovered Stolen Motor Vehicle,6,no,Types Other Than Top 3
+2014,Recovered Stolen Property,5,no,Types Other Than Top 3
+2014,Robbery,2,no,Types Other Than Top 3
+2014,Shoplifter,1,no,Types Other Than Top 3
+2014,Stolen Motor Vehicle,6,no,Types Other Than Top 3
+2014,Suspicious Person/Auto,4,no,Types Other Than Top 3
+2014,Theft,37,no,Types Other Than Top 3
+2014,Theft from Auto,6,no,Types Other Than Top 3
+2014,Traffic Arrest,67,yes,Traffic Arrest
+2014,Traffic Offense,1,no,Types Other Than Top 3
+2014,Trespassing,17,no,Types Other Than Top 3
+2014,Vandalism,5,no,Types Other Than Top 3
+2014,Vehicle Tampering,1,no,Types Other Than Top 3
+2014,Warrant/Summons Service,1,no,Types Other Than Top 3
+2014,Weapon Violation,9,no,Types Other Than Top 3
+2014,NA,10,no,Types Other Than Top 3
+2015,Accident,1,no,Types Other Than Top 3
+2015,Alcohol Violation,13,no,Types Other Than Top 3
+2015,Assault,8,no,Types Other Than Top 3
+2015,Assault (Title IX Related),2,no,Types Other Than Top 3
+2015,Burglary,11,no,Types Other Than Top 3
+2015,Burglary (Title IX Related),1,no,Types Other Than Top 3
+2015,CDS Violation,128,yes,CDS Violation
+2015,Disorderly Conduct,17,no,Types Other Than Top 3
+2015,DWI/DUI,165,yes,DWI/DUI
+2015,False Report/Statement,2,no,Types Other Than Top 3
+2015,Fraud,1,no,Types Other Than Top 3
+2015,Harassment/Stalking,1,no,Types Other Than Top 3
+2015,Indecent Exposure,1,no,Types Other Than Top 3
+2015,Other Incident,1,no,Types Other Than Top 3
+2015,Recovered Stolen Motor Vehicle,6,no,Types Other Than Top 3
+2015,Recovered Stolen Property,11,no,Types Other Than Top 3
+2015,Robbery,2,no,Types Other Than Top 3
+2015,Stolen Motor Vehicle,3,no,Types Other Than Top 3
+2015,Stolen Motor Vehicle (Title IX Related),1,no,Types Other Than Top 3
+2015,Suspicious Activity,1,no,Types Other Than Top 3
+2015,Suspicious Person/Auto,1,no,Types Other Than Top 3
+2015,Theft,25,no,Types Other Than Top 3
+2015,Theft from Auto,2,no,Types Other Than Top 3
+2015,Traffic Arrest,38,yes,Traffic Arrest
+2015,Traffic Offense,1,no,Types Other Than Top 3
+2015,Trespassing,14,no,Types Other Than Top 3
+2015,Trespassing (Title IX Related),1,no,Types Other Than Top 3
+2015,Vandalism,8,no,Types Other Than Top 3
+2015,Violation of Protect/Peace Order,1,no,Types Other Than Top 3
+2015,Warrant/Summons Service,1,no,Types Other Than Top 3
+2015,Weapon Violation,5,no,Types Other Than Top 3
+2015,NA,1,no,Types Other Than Top 3
+2016,Accident,1,no,Types Other Than Top 3
+2016,Alcohol Violation,11,no,Types Other Than Top 3
+2016,Assault,13,no,Types Other Than Top 3
+2016,Burglary,14,no,Types Other Than Top 3
+2016,CDS Violation,97,yes,CDS Violation
+2016,Disorderly Conduct,12,no,Types Other Than Top 3
+2016,DWI/DUI,114,yes,DWI/DUI
+2016,Fraud,5,no,Types Other Than Top 3
+2016,Harassment/Stalking,1,no,Types Other Than Top 3
+2016,Indecent Exposure,2,no,Types Other Than Top 3
+2016,Indecent Exposure (Title IX Related),1,no,Types Other Than Top 3
+2016,Noise Complaint,1,no,Types Other Than Top 3
+2016,Peeping Tom (Title IX Related),1,no,Types Other Than Top 3
+2016,Rape,1,no,Types Other Than Top 3
+2016,Recovered Stolen Motor Vehicle,3,no,Types Other Than Top 3
+2016,Recovered Stolen Property,5,no,Types Other Than Top 3
+2016,Robbery,3,no,Types Other Than Top 3
+2016,Sex Offense,1,no,Types Other Than Top 3
+2016,Sex Offense (Title IX Related),1,no,Types Other Than Top 3
+2016,Stolen Motor Vehicle,6,no,Types Other Than Top 3
+2016,Suspicious Activity,4,no,Types Other Than Top 3
+2016,Suspicious Person/Auto,1,no,Types Other Than Top 3
+2016,Theft,21,yes,Theft
+2016,Theft from Auto,1,no,Types Other Than Top 3
+2016,Traffic Arrest,18,no,Types Other Than Top 3
+2016,Trespassing,13,no,Types Other Than Top 3
+2016,Vandalism,7,no,Types Other Than Top 3
+2016,Warrant/Summons Service,1,no,Types Other Than Top 3
+2016,Weapon Violation,8,no,Types Other Than Top 3
+2016,NA,1,no,Types Other Than Top 3
+2017,Alcohol Violation,3,no,Types Other Than Top 3
+2017,Arson,1,no,Types Other Than Top 3
+2017,Assault,13,no,Types Other Than Top 3
+2017,Assault (Title IX Related),2,no,Types Other Than Top 3
+2017,Burglary,7,no,Types Other Than Top 3
+2017,CDS Violation,113,yes,CDS Violation
+2017,Disorderly Conduct,19,no,Types Other Than Top 3
+2017,DWI/DUI,122,yes,DWI/DUI
+2017,False Report/Statement,1,no,Types Other Than Top 3
+2017,Fraud,4,no,Types Other Than Top 3
+2017,Harassment/Stalking,1,no,Types Other Than Top 3
+2017,Homicide,1,no,Types Other Than Top 3
+2017,Indecent Exposure,2,no,Types Other Than Top 3
+2017,Indecent Exposure (Title IX Related),1,no,Types Other Than Top 3
+2017,Rape,1,no,Types Other Than Top 3
+2017,Recovered Stolen Motor Vehicle,11,no,Types Other Than Top 3
+2017,Recovered Stolen Property,8,no,Types Other Than Top 3
+2017,Robbery,4,no,Types Other Than Top 3
+2017,Stolen Motor Vehicle,2,no,Types Other Than Top 3
+2017,Suspicious Activity,1,no,Types Other Than Top 3
+2017,Suspicious Person/Auto,3,no,Types Other Than Top 3
+2017,Theft,41,yes,Theft
+2017,Theft (Title IX Related),1,no,Types Other Than Top 3
+2017,Theft from Auto,1,no,Types Other Than Top 3
+2017,Traffic Arrest,2,no,Types Other Than Top 3
+2017,Trespassing,15,no,Types Other Than Top 3
+2017,Vandalism,7,no,Types Other Than Top 3
+2017,Weapon Violation,9,no,Types Other Than Top 3
+2017,NA,2,no,Types Other Than Top 3
+2018,Alarm,1,no,Types Other Than Top 3
+2018,Alcohol Violation,4,no,Types Other Than Top 3
+2018,Assault,5,no,Types Other Than Top 3
+2018,Burglary,3,no,Types Other Than Top 3
+2018,CDS Violation,93,yes,CDS Violation
+2018,Disorderly Conduct,4,no,Types Other Than Top 3
+2018,Domestic,1,no,Types Other Than Top 3
+2018,DWI/DUI,163,yes,DWI/DUI
+2018,False Report/Statement,2,no,Types Other Than Top 3
+2018,Fraud,3,no,Types Other Than Top 3
+2018,Harassment/Stalking,2,no,Types Other Than Top 3
+2018,Hate Bias Incident,1,no,Types Other Than Top 3
+2018,Indecent Exposure,3,no,Types Other Than Top 3
+2018,Indecent Exposure (Title IX Related),1,no,Types Other Than Top 3
+2018,Other Incident,1,no,Types Other Than Top 3
+2018,Pornography/Obscene Material,2,no,Types Other Than Top 3
+2018,Rape,1,no,Types Other Than Top 3
+2018,Recovered Stolen Motor Vehicle,5,no,Types Other Than Top 3
+2018,Recovered Stolen Property,2,no,Types Other Than Top 3
+2018,Robbery,1,no,Types Other Than Top 3
+2018,Stolen Motor Vehicle,7,no,Types Other Than Top 3
+2018,Suspicious Activity,1,no,Types Other Than Top 3
+2018,Suspicious Person/Auto,2,no,Types Other Than Top 3
+2018,Telephone/EMail Misuse (Title IX Related),1,no,Types Other Than Top 3
+2018,Theft,15,yes,Theft
+2018,Theft from Auto,3,no,Types Other Than Top 3
+2018,Traffic Arrest,2,no,Types Other Than Top 3
+2018,Trespassing,14,no,Types Other Than Top 3
+2018,Trespassing (Title IX Related),1,no,Types Other Than Top 3
+2018,Vandalism,7,no,Types Other Than Top 3
+2018,Warrant/Summons Service,1,no,Types Other Than Top 3
+2018,Weapon Violation,1,no,Types Other Than Top 3
+2018,NA,1,no,Types Other Than Top 3
+2019,Alcohol Violation,33,no,Types Other Than Top 3
+2019,Assault,9,no,Types Other Than Top 3
+2019,Assault (Title IX Related),1,no,Types Other Than Top 3
+2019,Assist Other Agency,2,no,Types Other Than Top 3
+2019,Burglary,13,no,Types Other Than Top 3
+2019,CDS Violation,179,yes,CDS Violation
+2019,Disorderly Conduct,12,no,Types Other Than Top 3
+2019,DWI/DUI,261,yes,DWI/DUI
+2019,DWI/DUI (Title IX Related),1,no,Types Other Than Top 3
+2019,Emergency Petition,1,no,Types Other Than Top 3
+2019,Fireworks Complaint,1,no,Types Other Than Top 3
+2019,Fraud,3,no,Types Other Than Top 3
+2019,Indecent Exposure,1,no,Types Other Than Top 3
+2019,Indecent Exposure (Title IX Related),1,no,Types Other Than Top 3
+2019,Injured/Sick Person,1,no,Types Other Than Top 3
+2019,Other Incident,2,no,Types Other Than Top 3
+2019,Recovered Stolen Motor Vehicle,4,no,Types Other Than Top 3
+2019,Recovered Stolen Property,5,no,Types Other Than Top 3
+2019,Robbery,1,no,Types Other Than Top 3
+2019,Sex Offense,2,no,Types Other Than Top 3
+2019,Sex Offense (Title IX Related),2,no,Types Other Than Top 3
+2019,Stolen Motor Vehicle,1,no,Types Other Than Top 3
+2019,Suspicious Activity,2,no,Types Other Than Top 3
+2019,Suspicious Person/Auto,4,no,Types Other Than Top 3
+2019,Telephone/EMail Misuse,1,no,Types Other Than Top 3
+2019,Theft,42,yes,Theft
+2019,Theft from Auto,3,no,Types Other Than Top 3
+2019,Threat Assessment,1,no,Types Other Than Top 3
+2019,Traffic Arrest,2,no,Types Other Than Top 3
+2019,Traffic Offense,1,no,Types Other Than Top 3
+2019,Trespassing,13,no,Types Other Than Top 3
+2019,Trespassing (Title IX Related),1,no,Types Other Than Top 3
+2019,Vandalism,8,no,Types Other Than Top 3
+2019,Violation of Protect/Peace Order,1,no,Types Other Than Top 3
+2019,Weapon Violation,3,no,Types Other Than Top 3
+2019,NA,1,no,Types Other Than Top 3
+2020,Accident,1,no,Types Other Than Top 3
+2020,Alcohol Violation,9,no,Types Other Than Top 3
+2020,Assist Other Agency,1,no,Types Other Than Top 3
+2020,Burglary,6,no,Types Other Than Top 3
+2020,CDS Violation,91,yes,CDS Violation
+2020,Disorderly Conduct,4,no,Types Other Than Top 3
+2020,DWI/DUI,104,yes,DWI/DUI
+2020,Fraud,1,no,Types Other Than Top 3
+2020,Hate Bias Incident,1,no,Types Other Than Top 3
+2020,Indecent Exposure,2,no,Types Other Than Top 3
+2020,Juvenile Offense,1,no,Types Other Than Top 3
+2020,Other Incident,4,no,Types Other Than Top 3
+2020,Recovered Stolen Motor Vehicle,3,no,Types Other Than Top 3
+2020,Recovered Stolen Property,4,no,Types Other Than Top 3
+2020,Stolen Motor Vehicle,3,no,Types Other Than Top 3
+2020,Suspicious Activity,2,no,Types Other Than Top 3
+2020,Suspicious Person/Auto,2,no,Types Other Than Top 3
+2020,Theft,23,yes,Theft
+2020,Theft from Auto,3,no,Types Other Than Top 3
+2020,Threat Assessment,1,no,Types Other Than Top 3
+2020,Traffic Arrest,1,no,Types Other Than Top 3
+2020,Traffic Offense,4,no,Types Other Than Top 3
+2020,Trespassing,3,no,Types Other Than Top 3
+2020,Vandalism,7,no,Types Other Than Top 3
+2020,Warrant/Summons Service,1,no,Types Other Than Top 3
+2020,Weapon Violation,4,no,Types Other Than Top 3
+2020,NA,1,no,Types Other Than Top 3
+2021,Alcohol Violation,3,no,Types Other Than Top 3
+2021,Assault,2,no,Types Other Than Top 3
+2021,Assist Other Agency / Carjacking,1,no,Types Other Than Top 3
+2021,Bomb Threat,1,no,Types Other Than Top 3
+2021,Burglary,9,no,Types Other Than Top 3
+2021,CDS Violation,76,yes,CDS Violation
+2021,Disorderly Conduct,5,no,Types Other Than Top 3
+2021,Domestic,1,no,Types Other Than Top 3
+2021,DWI/DUI,165,yes,DWI/DUI
+2021,Indecent Exposure,1,no,Types Other Than Top 3
+2021,Indecent Exposure (Title IX Related),1,no,Types Other Than Top 3
+2021,Other Incident,2,no,Types Other Than Top 3
+2021,Peeping Tom (Title IX Related),1,no,Types Other Than Top 3
+2021,Recovered Stolen Motor Vehicle,3,no,Types Other Than Top 3
+2021,Recovered Stolen Property,4,no,Types Other Than Top 3
+2021,Resisting Arrest,1,no,Types Other Than Top 3
+2021,Stolen Motor Vehicle,1,no,Types Other Than Top 3
+2021,Suspicious Activity,3,no,Types Other Than Top 3
+2021,Telephone/EMail Misuse (Title IX Related),1,no,Types Other Than Top 3
+2021,Theft,21,yes,Theft
+2021,Traffic Arrest,2,no,Types Other Than Top 3
+2021,Trespassing,9,no,Types Other Than Top 3
+2021,Vandalism,5,no,Types Other Than Top 3
+2021,Weapon Violation,3,no,Types Other Than Top 3
+2021,NA,1,no,Types Other Than Top 3
