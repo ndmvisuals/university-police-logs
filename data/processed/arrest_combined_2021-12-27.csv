@@ -217,7 +217,7 @@ year,type,number,top_3,final_type
 2020,Weapon Violation,4,no,Types Other Than Top 3
 2020,NA,1,no,Types Other Than Top 3
 2021,Alcohol Violation,3,no,Types Other Than Top 3
-2021,Assault,1,no,Types Other Than Top 3
+2021,Assault,2,no,Types Other Than Top 3
 2021,Assist Other Agency / Carjacking,1,no,Types Other Than Top 3
 2021,Bomb Threat,1,no,Types Other Than Top 3
 2021,Burglary,9,no,Types Other Than Top 3
@@ -228,14 +228,15 @@ year,type,number,top_3,final_type
 2021,Indecent Exposure,1,no,Types Other Than Top 3
 2021,Indecent Exposure (Title IX Related),1,no,Types Other Than Top 3
 2021,Other Incident,2,no,Types Other Than Top 3
+2021,Peeping Tom (Title IX Related),1,no,Types Other Than Top 3
 2021,Recovered Stolen Motor Vehicle,3,no,Types Other Than Top 3
 2021,Recovered Stolen Property,4,no,Types Other Than Top 3
 2021,Stolen Motor Vehicle,1,no,Types Other Than Top 3
 2021,Suspicious Activity,3,no,Types Other Than Top 3
 2021,Telephone/EMail Misuse (Title IX Related),1,no,Types Other Than Top 3
-2021,Theft,20,yes,Theft
+2021,Theft,20,no,Types Other Than Top 3
 2021,Traffic Arrest,2,no,Types Other Than Top 3
 2021,Trespassing,8,no,Types Other Than Top 3
-2021,Vandalism,4,no,Types Other Than Top 3
+2021,Vandalism,5,no,Types Other Than Top 3
 2021,Weapon Violation,3,no,Types Other Than Top 3
-2021,NA,1,no,Types Other Than Top 3
+2021,NA,35,yes,NA
