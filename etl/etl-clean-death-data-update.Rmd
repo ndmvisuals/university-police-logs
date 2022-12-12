@@ -1,0 +1,307 @@
+---
+title: "Untitled"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(janitor)
+library(lubridate)
+library(readxl)
+
+standardize_clean = function(df){
+  
+  df_clean = df %>% 
+    clean_names() %>% 
+    mutate(across(everything(), as.character)) %>% 
+    mutate(across(everything(), tolower)) %>% 
+    mutate(across(everything(), str_squish)) 
+  
+  return(df_clean)
+    
+  
+}
+```
+
+
+
+
+## Read in Data
+
+```{r}
+
+### ---------------------------------What Meg sent--------------------
+
+
+# FOIA --------------------------------------------
+
+
+# FOIA 2020-00635 is the big one from 2009 to late 2019
+
+FOIA_2020_00635_cropped <- read_csv("../data/processed/individual-files/FOIA 2020-00635 cropped.csv") %>% clean_names()
+
+FOIA_2020_00635_cropped_2 = FOIA_2020_00635_cropped %>% 
+  select(x6)
+
+# 2020-031842 late 2019 goes through June of 2020
+X2020_031842 <- read_csv("../data/processed/individual-files/2020-031842.csv") %>% clean_names()
+
+# From professor-------------
+# These take us through Janruary of this year 2022
+# maybe not in the jignan analysis
+X2021_05115 <- read_csv("../data/processed/individual-files/2021-05115.csv") %>% clean_names() %>% 
+  mutate(dod = mdy(dod))
+  
+# this sheet is already in the jingnan analysis
+X2022_00409_and_2022_01824 <- read_csv("../data/processed/individual-files/2022-00409 and 2022-01824.csv") %>% clean_names() %>% 
+mutate(dod = mdy(dod))
+
+
+
+
+
+
+
+### ----------------------What Jingnan sent-----------------------
+
+
+Jan2015_May2021_Deaths_Analyzed <- read_excel("../data/processed/jingnan-github-individual-files/Jan2015-May2021 Deaths Analyzed.xlsx") %>% 
+  standardize_clean() %>% 
+  mutate(dod = ymd(dod)) %>% 
+  mutate(source = "Jan2015-May2021 Deaths Analyzed" )
+  
+  
+
+
+
+
+X20211217_2019_2021_deaths <- read_csv("../data/processed/jingnan-github-individual-files/20211217_2019_2021_deaths.csv") %>% 
+  standardize_clean() %>% 
+  mutate(dod = ymd(dod)) %>% 
+  mutate(source = "20211217_2019_2021_deaths" )
+
+
+X20220208_BOP_deaths_Apr_21_Jan_22 <- read_csv("../data/processed/jingnan-github-individual-files/20220208_BOP_deaths_Apr_21_Jan_22.csv") %>% 
+  standardize_clean() %>% 
+  rename(inst_id = facl_code,
+         register_num = bop_register_num,
+         dod = act_rel_date,
+         api_age = age, 
+         api_sex = sex,
+         api_race = race) %>% 
+  mutate(dod = mdy(dod)) %>% 
+  ## just to get to match up %>% 
+  mutate(api_name_first = name_first)
+
+
+## ---- Jingnan processed
+
+
+x20211217_2019_2021_deaths = read_csv("../data/processed/jingnan-github-invididual-files-with-names/20211217_2019_2021_deaths.csv") %>% 
+   standardize_clean() %>% 
+  mutate(dod = ymd(dod)) %>% 
+  mutate(source = "20211217_2019_2021_deaths" )
+
+x20220208_BOP_deaths_Apr_21_Jan_22 = read_csv("../data/processed/jingnan-github-invididual-files-with-names/20220208_BOP_deaths_Apr_21_Jan_22.csv") %>% 
+   standardize_clean() %>% 
+  rename(inst_id = facl_code,
+         register_num = bop_register_num,
+         dod = act_rel_date,
+         api_age = age, 
+         api_sex = sex,
+         api_race = race,
+         api_name_first = name_first,
+         api_name_last = name_last,
+        api_name_middle = name_middle,
+        api_proj_rel_date = proj_rel_date,
+        api_suffix = 	suffix,
+        api_release_code = release_code,
+        api_inmate_num_type = inmate_num_type,
+        api_inmate_num = inmate_num,
+        api_facl_url = facl_url,
+        api_facl_type = facl_type,
+        api_facl_name =facl_name) %>% 
+  mutate(dod = mdy(dod)) %>% 
+  mutate(source = "20220208_BOP_deaths_Apr_21_Jan_22" )
+
+JAN_2009_November_2019 = read_csv("../data/processed/jingnan-github-invididual-files-with-names/Jan2009-May2021 Deaths Analyzed - FOIA JAN 2009 - November 2019.csv") %>% 
+  standardize_clean() %>% 
+  separate(dod, c("dod", "space"), " ") %>% 
+  select(-space) %>% 
+  mutate(dod = mdy(dod)) %>% 
+  mutate(source = "FOIA JAN 2009 - November 2019" )
+
+
+compare_cols = compare_df_cols(x20211217_2019_2021_deaths, x20220208_BOP_deaths_Apr_21_Jan_22, JAN_2009_November_2019)
+
+
+deathmasterraw = bind_rows(x20211217_2019_2021_deaths,x20220208_BOP_deaths_Apr_21_Jan_22, JAN_2009_November_2019) %>% 
+  distinct(register_num, .keep_all = TRUE) %>% 
+  select(-c(first_parsed, last_parsed, match, revisit, unnamed_0, x1, name_last, api_inmate_num_type, inmate_name, api_proj_rel_date, api_suffix, api_act_rel_date,  api_inmate_num)) %>% 
+  select("inst_id", 
+         "register_num" ,
+         "api_name_last"  ,
+         "api_name_first" ,
+         "api_name_middle",
+         "dob"        ,   
+         "dod"    , 
+         "death_category" , 
+         "icd10primary" , 
+         "death_type",
+         "api_sex"  ,     
+         "api_race" ,   
+         "api_age",
+         "api_release_code",
+         "api_facl_code"  ,
+         "api_facl_name"  , 
+         "api_facl_type" ,
+         "api_facl_url" , 
+         "source") %>% 
+  mutate(year = year(dod))
+  
+
+
+
+
+
+# ----
+
+
+	
+
+
+
+# deathmasterraw_1 = bind_rows(Jan2015_May2021_Deaths_Analyzed,X20211217_2019_2021_deaths, X20220208_BOP_deaths_Apr_21_Jan_22) %>% 
+#   select(inst_id, 
+#          register_num, 
+#          api_name_first, 
+#          api_name_middle, 
+#          api_name_last, 
+#          dod, api_age, 
+#          api_sex, 
+#          api_race,
+#          source) %>% 
+#   rename(name_first = api_name_first, 
+#          name_last= api_name_last ,
+#          name_middle =  api_name_middle ) %>% 
+#   distinct(register_num, .keep_all = TRUE) %>% 
+#   mutate(year = year(dod))
+#          api_name_last = name_last,
+#          api_name_middle = name_middle) %>% 
+#   mutate(source = "20220208_BOP_deaths_Apr_21_Jan_22")
+
+
+
+
+# test1 = anti_join(X2021_05115, deathmasterraw_1, by = c("reg_number" = "register_num"))
+# test2 = anti_join(X2022_00409_and_2022_01824, deathmasterraw_1, by = c("register_num")) 
+# 
+# # can't do because of no register num
+# # test3 = anti_join(X2020_031842, deathmasterraw, by = c("register_num")) 
+# 
+# test4 = anti_join(FOIA_2020_00635_cropped_2, deathmasterraw_1, by = c("x6" = "register_num"))
+
+# 
+# deathmasterraw_1 %>% 
+#   group_by(year) %>% 
+#   count()
+# 
+# death_master_compare = anti_join(deathmasterraw, deathmasterraw_1, by = "register_num")
+
+```
+
+
+Analysis
+```{r}
+
+
+
+
+
+# 
+# butner_all_complex_prisoners = deathmasterraw %>% 
+#   filter(inst_id =="buh")
+
+deathmasterraw
+
+butner_federal_medical_center_prison_deaths = deathmasterraw %>% 
+  filter(inst_id =="buh" & api_facl_type == "fmc")
+
+summary_all_prison_deaths = deathmasterraw %>% 
+  group_by(inst_id, year) %>% 
+  summarise(num_deaths = n()) %>% 
+  pivot_wider(names_from = year, names_glue = "x{year}", values_from = num_deaths, values_fill = 0) %>% 
+  select(inst_id, x2009, x2010,x2011,x2012,x2013,x2014, x2015, x2016, x2017, x2018, x2019,x2020, x2021, x2022) %>% 
+  mutate(total_deaths = rowSums(across(where(is.numeric))), .before = "x2009") %>% 
+  arrange(desc(total_deaths))
+
+
+unique_prison_name_combos = deathmasterraw %>% 
+  distinct(inst_id, api_facl_name, api_facl_type) %>% 
+  arrange(inst_id)
+
+```
+
+## Write out data
+ 
+```{r}
+
+deathmasterraw %>%  write.csv("../data/public/all-prison-deaths-20220606.csv")
+butner_federal_medical_center_prison_deaths %>%  write.csv("../data/public/butner_federal_medical_center_prisoners-20220606.csv")
+summary_all_prison_deaths %>%  write.csv("../data/public/summary_all_prison_deaths-20220606.csv")
+unique_prison_name_combos %>%  write.csv("../data/public/unique_prison_name_combos-20220606.csv")
+
+
+```
+
+
+
+
+## Clean
+
+```{r}
+
+
+
+
+# X2020_031842_clean = X2020_031842 %>% 
+#   standard_clean() %>% 
+#   mutate(dob = mdy(dob)) %>% 
+#   mutate(dod = mdy(dod)) %>% 
+#   mutate(name = paste0(name_first, " ", name_last), .after = name_first) %>% 
+#   mutate(name = str_squish(name))
+# 
+# 
+# X2021_05115_clean = X2021_05115 %>% 
+#   standardize_clean() %>% 
+#   rename(inmate_name = lnmate_name) %>% 
+#   select(-x9, -x3) %>% 
+#   separate(inmate_name, c("name_last", "name_first"), ",", remove = FALSE) %>% 
+#   mutate(name = paste0(name_first, " ", name_last), .after = name_first) %>% 
+#   mutate(name = str_squish(name)) %>% 
+#   mutate(dod = mdy(dod))
+#   
+# 
+# X2022_00409_and_2022_01824_clean = X2022_00409_and_2022_01824 %>% 
+#   select(-x9) %>% 
+#   standard_clean() %>% 
+#   rename(inmate_name = lnmate_name) %>% 
+#   mutate(dod = mdy(dod)) %>% 
+#   separate(inmate_name, c("name_last", "name_first"), ",", remove = FALSE) %>% 
+#   mutate(name = paste0(name_first, " ", name_last), .after = name_first) %>% 
+#   mutate(name = str_squish(name)) %>% 
+#   select(-x5)
+#   
+  
+
+  
+  
+  
+
+
+```
+
